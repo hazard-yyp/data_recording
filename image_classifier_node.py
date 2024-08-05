@@ -110,7 +110,7 @@ class ImageClassifierNode:
         rospy.loginfo("Starting rosbag recording...")
         if not os.path.exists(self.rosbag_path):
             os.makedirs(self.rosbag_path)
-        self.process = subprocess.Popen(['rosbag', 'record', '-o', f'{self.rosbag_path}/recording'] + self.rosbag_topics + ['--lz4'])
+        self.process = subprocess.Popen(['rosbag', 'record', '-o', f'{self.rosbag_path}/aqc_808'] + self.rosbag_topics + ['--lz4'])
         self.recording = True
 
     def stop_recording(self):
