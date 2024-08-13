@@ -18,7 +18,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 # Install python packages
 RUN pip install --no-cache-dir rospkg opencv-python
 
-WORKDIR /usr/src/app
+# Reduce image size
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY image_classifier_node.py ./
-COPY model.pth ./
+# Set up entrypoint
+WORKDIR /usr/src/app
