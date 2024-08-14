@@ -19,6 +19,6 @@ docker run --gpus all -d --rm --name "$CONTAINER_NAME" --network=host --privileg
     -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /home/zhang/aqc/data_recording:/usr/src/app \
-    -v /media/zhang/My\ Book/week1_0806:/usr/rosbags \ # 修改为自己的路径
+    -v /media/zhang/My\ Book/week1_0806:/usr/rosbags \
     hazardyyp/data_recording:image_classifier \
     bash -c "source $ROS_SETUP && cd $WORKSPACE_SETUP && python3 image_classifier_node.py --model_path $MODEL_PATH --topic $TOPIC --rosbag_path /usr/rosbags --rosbag_topics $ROSBAG_TOPICS"

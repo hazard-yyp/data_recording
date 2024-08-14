@@ -12,6 +12,7 @@ from PIL import Image
 import argparse
 import tkinter as tk
 from PIL import Image, ImageTk
+import threading  # 引入线程库
 
 # 定义CNN模型（与训练时的模型保持一致）
 class SimpleCNN(nn.Module):
@@ -100,18 +101,19 @@ class ImageClassifierNode:
                 
                 if label == 'sea_side' and not self.recording:
                     self.start_recording()
-                elif label == 'land_side' and self.recording:
-                    self.stop_recording()
                     
         except Exception as e:
             rospy.logerr(f'Error in callback: {str(e)}')
 
     def start_recording(self):
-        rospy.loginfo("Starting rosbag recording...")
+        rospy.loginfo("Starting rosbag recording for 30 seconds...")
         if not os.path.exists(self.rosbag_path):
             os.makedirs(self.rosbag_path)
         self.process = subprocess.Popen(['rosbag', 'record', '-o', f'{self.rosbag_path}/aqc_808'] + self.rosbag_topics + ['--lz4'])
         self.recording = True
+        
+        # 设置30秒后停止录制
+        threading.Timer(30.0, self.stop_recording).start()
 
     def stop_recording(self):
         if self.process:
