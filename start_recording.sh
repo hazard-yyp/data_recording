@@ -6,7 +6,7 @@ ROS_SETUP="/opt/ros/noetic/setup.bash"
 WORKSPACE_SETUP="/usr/src/app"
 
 # 参数变量
-MODEL_PATH="model.pth"
+MODEL_PATH="model_v5.pth"
 TOPIC="/suite_1/8/rgb/compressed"
 ROSBAG_TOPICS="/ouster/points /suite_1/16/rgb/compressed /suite_1/8/rgb/compressed /suite_2/16/rgb/compressed /suite_2/8/rgb/compressed /vectornav/IMU"
 
