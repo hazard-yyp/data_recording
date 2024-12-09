@@ -2,6 +2,12 @@ FROM pytorch/pytorch:2.1.1-cuda12.1-cudnn8-devel
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Set timezone to Singapore
+ENV TZ=Asia/Singapore
+RUN apt-get update && apt-get install -y tzdata && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    dpkg-reconfigure -f noninteractive tzdata
+
 # Install ROS Noetic
 # Setup keys and source list for ROS
 RUN apt-get update && apt-get install -y curl gnupg2 lsb-release && \
